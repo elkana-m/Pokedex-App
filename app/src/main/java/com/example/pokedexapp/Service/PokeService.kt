@@ -1,5 +1,6 @@
 package com.example.pokedexapp.Service
 
+import android.widget.EditText
 import com.example.pokedexapp.dto.Pokemon
 import com.example.pokedexapp.dto.Results
 import com.example.pokedexapp.network.RetrofitApiFactory
