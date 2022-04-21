@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedexapp.R
@@ -56,6 +57,12 @@ class ListPokemon : AppCompatActivity(), ListsView {
 
     override fun findPageIndex():Int
     {
+        var isPageIndex = pageIndex.text.toString().toIntOrNull()
+        if (isPageIndex == null)
+        {
+            Toast.makeText(this@ListPokemon, "Must be a digit", Toast.LENGTH_SHORT).show()
+            pageIndex.setText("1")
+        }
         return pageIndex.text.toString().toInt()
     }
 

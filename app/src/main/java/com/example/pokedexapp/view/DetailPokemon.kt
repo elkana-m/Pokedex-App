@@ -38,6 +38,7 @@ class DetailPokemon : AppCompatActivity(){
         val intent = intent
         val tmpUrl = intent.getStringExtra("tmpUrl")
 
+        bindViews()
 
         // call retrofit
         //val service = PokeApi.create()
@@ -48,20 +49,20 @@ class DetailPokemon : AppCompatActivity(){
 
                 // if retrofit success, "response" should have info of all pokemon
                 if (response.isSuccessful) {
-                    imageDefault = findViewById(R.id.pokemonImageDefault)
+//                    imageDefault = findViewById(R.id.pokemonImageDefault)
                     Glide.with(this@DetailPokemon)
                         .load(response.body()!!.sprites?.front_default)
                         .into(imageDefault)
 
-                    imageShiny = findViewById(R.id.pokemonImageShiny)
+//                    imageShiny = findViewById(R.id.pokemonImageShiny)
                     Glide.with(this@DetailPokemon)
                         .load(response.body()!!.sprites?.front_shiny)
                         .into(imageShiny)
 
-                    name = findViewById(R.id.name)
+//                    name = findViewById(R.id.name)
                     name.text = response.body()!!.forms[0]!!.name.toString()
 
-                    statHP = findViewById(R.id.statHP)
+//                    statHP = findViewById(R.id.statHP)
                     statHP.text = response.body()!!.stats[0]!!.base_stat.toString()
 
                     // radar chart
@@ -96,7 +97,7 @@ class DetailPokemon : AppCompatActivity(){
         val baseStatsArray = mutableListOf<RadarEntry>()
         for (param in params) baseStatsArray.add(RadarEntry(param))
 
-        chart = findViewById(R.id.radarChart)
+//        chart = findViewById(R.id.radarChart)
 
         val baseStatsDataset= RadarDataSet(baseStatsArray, "Base Stats")
         baseStatsDataset.setDrawFilled(true)
@@ -134,6 +135,15 @@ class DetailPokemon : AppCompatActivity(){
         chart.data = data
         chart.data.setValueTextSize(11f)
         chart.invalidate()
+    }
+
+    private fun bindViews()
+    {
+        imageDefault = findViewById(R.id.pokemonImageDefault)
+        imageShiny = findViewById(R.id.pokemonImageShiny)
+        name = findViewById(R.id.name)
+        statHP = findViewById(R.id.statHP)
+        chart = findViewById(R.id.radarChart)
     }
 
 }
