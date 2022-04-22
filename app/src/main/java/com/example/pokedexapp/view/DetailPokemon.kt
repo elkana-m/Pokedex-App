@@ -53,6 +53,65 @@ class DetailPokemon : AppCompatActivity(), DetailView{
     }
 
 
+
+    override fun showError(errorMessage: String) {
+        Snackbar.make(container, errorMessage, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun bindPokemonDetail(pokeResource:Resource){
+        Glide.with(this@DetailPokemon)
+            .load(pokeResource.sprites?.front_default)
+            .into(imageDefault)
+
+        Glide.with(this@DetailPokemon)
+            .load(pokeResource.sprites?.front_shiny)
+            .into(imageShiny)
+
+        // tracking when the ability is more than 2
+        var listLength = 0
+        for (i in pokeResource.abilities){
+            listLength+=1
+        }
+        when (listLength)
+        {
+            1 -> {
+                ability.text = pokeResource.abilities[0]!!.ability!!.name.toString()
+            }
+            2 -> {
+                ability.text = pokeResource.abilities[0]!!.ability!!.name.toString()
+                hiddenAbility.text = pokeResource.abilities[1]!!.ability!!.name.toString()
+            }
+            3 -> {
+                ability.text = pokeResource.abilities[0]!!.ability!!.name.toString()
+                ability2.text = pokeResource.abilities[1]!!.ability!!.name.toString()
+                hiddenAbility.text = pokeResource.abilities[2]!!.ability!!.name.toString()
+            }
+        }
+
+
+        createActionBar(pokeResource)
+        createRadarChart(pokeResource)
+    }
+
+    private fun bindViews()
+    {
+        imageDefault = findViewById(R.id.pokemonImageDefault)
+        imageShiny = findViewById(R.id.pokemonImageShiny)
+        ability = findViewById(R.id.ability)
+        ability2 = findViewById(R.id.ability2)
+        hiddenAbility = findViewById(R.id.hiddenAbility)
+        chart = findViewById(R.id.radarChart)
+    }
+
+
+    private fun createActionBar(pokeResource:Resource){
+        // button to go back to main list on actionbar
+        val actionBar = supportActionBar
+        actionBar!!.title = pokeResource.forms[0]!!.name.toString()
+        actionBar.setDisplayHomeAsUpEnabled(true)
+    }
+
+    // Radar chart
     fun RadarChart(hp:Float, attack: Float, defense: Float, sAttack: Float, sDefense: Float, speed: Float) {
 
         val params = arrayOf(hp,attack,defense,sAttack,sDefense,speed)
@@ -98,40 +157,7 @@ class DetailPokemon : AppCompatActivity(), DetailView{
         chart.invalidate()
     }
 
-    override fun showError(errorMessage: String) {
-        Snackbar.make(container, errorMessage, Snackbar.LENGTH_LONG).show()
-    }
-
-    override fun bindPokemonDetail(pokeResource:Resource){
-        Glide.with(this@DetailPokemon)
-            .load(pokeResource.sprites?.front_default)
-            .into(imageDefault)
-
-        Glide.with(this@DetailPokemon)
-            .load(pokeResource.sprites?.front_shiny)
-            .into(imageShiny)
-
-        // tracking when the ability is more than 2
-        var listLength = 0
-        for (i in pokeResource.abilities){
-            listLength+=1
-        }
-        when (listLength)
-        {
-            1 -> {
-                ability.text = pokeResource.abilities[0]!!.ability!!.name.toString()
-            }
-            2 -> {
-                ability.text = pokeResource.abilities[0]!!.ability!!.name.toString()
-                hiddenAbility.text = pokeResource.abilities[1]!!.ability!!.name.toString()
-            }
-            3 -> {
-                ability.text = pokeResource.abilities[0]!!.ability!!.name.toString()
-                ability2.text = pokeResource.abilities[1]!!.ability!!.name.toString()
-                hiddenAbility.text = pokeResource.abilities[2]!!.ability!!.name.toString()
-            }
-        }
-
+    private fun createRadarChart(pokeResource:Resource){
         // radar chart
         val hp = pokeResource.stats[0]!!.base_stat!!.toFloat()
         val attack = pokeResource.stats[1]!!.base_stat!!.toFloat()
@@ -141,22 +167,6 @@ class DetailPokemon : AppCompatActivity(), DetailView{
         val speed = pokeResource.stats[5]!!.base_stat!!.toFloat()
         RadarChart(hp, attack, defence, sAttack, sDefense, speed)
 
-        // button to go back to main list on actionbar
-        val actionBar = supportActionBar
-        actionBar!!.title = pokeResource.forms[0]!!.name.toString()
-        actionBar.setDisplayHomeAsUpEnabled(true)
-
-    }
-
-
-    private fun bindViews()
-    {
-        imageDefault = findViewById(R.id.pokemonImageDefault)
-        imageShiny = findViewById(R.id.pokemonImageShiny)
-        ability = findViewById(R.id.ability)
-        ability2 = findViewById(R.id.ability2)
-        hiddenAbility = findViewById(R.id.hiddenAbility)
-        chart = findViewById(R.id.radarChart)
     }
 
 }
