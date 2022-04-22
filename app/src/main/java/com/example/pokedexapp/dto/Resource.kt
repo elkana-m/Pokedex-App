@@ -1,10 +1,19 @@
 package com.example.pokedexapp.dto
 
 data class Resource(
+    val abilities: List<Abilities?>,
     val forms: List<Forms?>,
     val sprites: Sprites?,
     val stats: List<Stats?>
     )
+
+// Where the abilities are saved
+data class Abilities(
+    val ability: Ability?
+)
+data class Ability(
+    val name: String?
+)
 
 // Where the name is saved
 data class Forms(
