@@ -26,6 +26,7 @@ class DetailPokemon : AppCompatActivity(){
     lateinit var imageDefault: ImageView
     lateinit var imageShiny: ImageView
     lateinit var ability: TextView
+    lateinit var ability2: TextView
     lateinit var hiddenAbility: TextView
     lateinit var chart: RadarChart
 
@@ -57,10 +58,26 @@ class DetailPokemon : AppCompatActivity(){
                         .load(response.body()!!.sprites?.front_shiny)
                         .into(imageShiny)
 
-
-                    ability.text = response.body()!!.abilities[0]!!.ability!!.name.toString()
-
-                    hiddenAbility.text = response.body()!!.abilities[1]!!.ability!!.name.toString()
+                    // tracking when the ability is more than 2
+                    var listLength = 0
+                    for (i in response.body()!!.abilities){
+                        listLength+=1
+                    }
+                    when (listLength)
+                    {
+                        1 -> {
+                            ability.text = response.body()!!.abilities[0]!!.ability!!.name.toString()
+                        }
+                        2 -> {
+                            ability.text = response.body()!!.abilities[0]!!.ability!!.name.toString()
+                            hiddenAbility.text = response.body()!!.abilities[1]!!.ability!!.name.toString()
+                        }
+                        3 -> {
+                            ability.text = response.body()!!.abilities[0]!!.ability!!.name.toString()
+                            ability2.text = response.body()!!.abilities[1]!!.ability!!.name.toString()
+                            hiddenAbility.text = response.body()!!.abilities[2]!!.ability!!.name.toString()
+                        }
+                    }
 
                     // radar chart
                     val hp = response.body()!!.stats[0]!!.base_stat!!.toFloat()
@@ -138,6 +155,7 @@ class DetailPokemon : AppCompatActivity(){
         imageDefault = findViewById(R.id.pokemonImageDefault)
         imageShiny = findViewById(R.id.pokemonImageShiny)
         ability = findViewById(R.id.ability)
+        ability2 = findViewById(R.id.ability2)
         hiddenAbility = findViewById(R.id.hiddenAbility)
         chart = findViewById(R.id.radarChart)
     }
