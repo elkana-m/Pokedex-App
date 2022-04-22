@@ -7,7 +7,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.pokedexapp.R
+import com.example.pokedexapp.dto.Pokemon
 import com.example.pokedexapp.dto.Resource
+import com.example.pokedexapp.view.DetailView
 import com.example.pokedexapp.network.RetrofitApiFactory
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -21,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class DetailPokemon : AppCompatActivity(){
+class DetailPokemon : AppCompatActivity(), DetailView{
 
     lateinit var imageDefault: ImageView
     lateinit var imageShiny: ImageView
@@ -160,4 +162,13 @@ class DetailPokemon : AppCompatActivity(){
         chart = findViewById(R.id.radarChart)
     }
 
+    override fun bindPokemonDetail(pokeResource:Resource){
+        Glide.with(this@DetailPokemon)
+            .load(pokeResource.sprites?.front_default)
+            .into(imageDefault)
+
+        Glide.with(this@DetailPokemon)
+            .load(pokeResource.sprites?.front_shiny)
+            .into(imageShiny)
+    }
 }
