@@ -40,7 +40,7 @@ class ListPokemon : AppCompatActivity(), ListsView {
         super.onDestroy()
 
         // Save data when activity is destroyed
-        var editor = preferences.edit()
+        val editor = preferences.edit()
         editor.putInt("pageIndex",pageIndex.text.toString().toInt())
         editor.apply()
     }
