@@ -1,7 +1,10 @@
 package com.example.pokedexapp.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,16 +22,27 @@ class ListPokemon : AppCompatActivity(), ListsView {
     lateinit var pageIndex: EditText
     lateinit var btnToRefresh: Button
     lateinit var recyclerview: RecyclerView
+    lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_pokemon)
+
 
         bindViews()
 
         presenter = ListsPresenterFactory.createPresenter(this)
         presenter.start()
 
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+
+        // Save data when activity is destroyed
+        var editor = preferences.edit()
+        editor.putInt("pageIndex",pageIndex.text.toString().toInt())
+        editor.apply()
     }
 
     override fun showError(errorMessage: String) {
@@ -41,6 +55,7 @@ class ListPokemon : AppCompatActivity(), ListsView {
 
         val adapter = ListPokemonAdapter(pokeList, this)
         recyclerview.adapter = adapter
+
 
         adapter.setOnItemClickListener(object : ListPokemonAdapter.OnItemClickListener {
 
@@ -58,6 +73,7 @@ class ListPokemon : AppCompatActivity(), ListsView {
     override fun findPageIndex():Int
     {
         var isPageIndex = pageIndex.text.toString().toIntOrNull()
+
         if (isPageIndex == null)
         {
             Toast.makeText(this@ListPokemon, "Must be a digit", Toast.LENGTH_SHORT).show()
@@ -73,6 +89,10 @@ class ListPokemon : AppCompatActivity(), ListsView {
         recyclerview = findViewById(R.id.recyclerView)
         pageIndex = findViewById(R.id.pageIndex)
         btnToRefresh = findViewById(R.id.btnToRefresh)
+
+        preferences = getSharedPreferences("indexQuery", Context.MODE_PRIVATE)
+        val getter = preferences.getInt("pageIndex", 1)
+        pageIndex.setText(getter.toString())
     }
 
 }

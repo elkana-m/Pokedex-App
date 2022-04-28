@@ -109,6 +109,7 @@ class DetailPokemon : AppCompatActivity(), DetailView{
         val actionBar = supportActionBar
         actionBar!!.title = pokeResource.forms[0]!!.name.toString()
         actionBar.setDisplayHomeAsUpEnabled(true)
+//        SwipeBack
     }
 
     // Radar chart

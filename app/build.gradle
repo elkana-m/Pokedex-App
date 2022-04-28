@@ -60,4 +60,7 @@ dependencies {
     // MPAndroidChart for radar chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+//    swipe back
+    implementation 'com.github.liuguangqiang.swipeback:library:1.0.2@aar'
+
 }
