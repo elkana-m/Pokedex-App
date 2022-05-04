@@ -30,6 +30,7 @@
         <activity
             android:name=".view.DetailPokemonActivity"
             android:exported="false"
+            android:theme="@style/Theme.SlidrActivityTheme"
             android:parentActivityName=".view.ListPokemonActivity">
         </activity>
     </application>

@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet
 import com.google.android.material.snackbar.Snackbar
+import com.r0adkll.slidr.Slidr
 
 
 class DetailPokemonActivity : AppCompatActivity(), DetailView{
@@ -102,7 +103,8 @@ class DetailPokemonActivity : AppCompatActivity(), DetailView{
         val actionBar = supportActionBar
         actionBar!!.title = pokeResource.forms[0]!!.name.toString()
         actionBar.setDisplayHomeAsUpEnabled(true)
-//        SwipeBack
+        // SwipeBack
+        Slidr.attach(this)
     }
 
     // Radar chart
