@@ -106,7 +106,7 @@ class DetailPokemonActivity : AppCompatActivity(), DetailView{
     }
 
     // Radar chart
-    fun RadarChart(hp:Float, attack: Float, defense: Float, sAttack: Float, sDefense: Float, speed: Float) {
+    fun radarChart(hp:Float, attack: Float, defense: Float, sAttack: Float, sDefense: Float, speed: Float) {
 
         val params = arrayOf(hp,attack,defense,sAttack,sDefense,speed)
         val baseStatsArray = mutableListOf<RadarEntry>()
@@ -159,7 +159,7 @@ class DetailPokemonActivity : AppCompatActivity(), DetailView{
         val sAttack = pokeResource.stats[3]!!.base_stat!!.toFloat()
         val sDefense = pokeResource.stats[4]!!.base_stat!!.toFloat()
         val speed = pokeResource.stats[5]!!.base_stat!!.toFloat()
-        RadarChart(hp, attack, defence, sAttack, sDefense, speed)
+        radarChart(hp, attack, defence, sAttack, sDefense, speed)
 
     }
 
