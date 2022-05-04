@@ -25,7 +25,7 @@ class ListPokemonActivity : AppCompatActivity(), ListsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.list_pokemon)
+        setContentView(R.layout.layout_list_pokemon)
 
 
         bindViews()

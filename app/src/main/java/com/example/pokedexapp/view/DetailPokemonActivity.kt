@@ -34,7 +34,7 @@ class DetailPokemonActivity : AppCompatActivity(), DetailView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.detail_pokemon)
+        setContentView(R.layout.layout_detail_pokemon)
 
         val intent = intent
         val tmpUrl = intent.getStringExtra("tmpUrl")
