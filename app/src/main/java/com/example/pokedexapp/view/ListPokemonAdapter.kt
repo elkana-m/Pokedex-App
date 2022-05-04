@@ -2,11 +2,13 @@ package com.example.pokedexapp.view
 
 import android.content.Context
 import android.content.Intent
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListPokemonAdapter(private val pokeList: List<Results?>, private val context:Context) :
+class ListPokemonAdapter(private val pokeList: List<Results?>, private val context:Context, ) :
     RecyclerView.Adapter<ListPokemonAdapter.MyViewHolder>(){
 
     private lateinit var mListener: OnItemClickListener
@@ -35,6 +37,7 @@ class ListPokemonAdapter(private val pokeList: List<Results?>, private val conte
         val pokeName: TextView
         //val pokeURL: TextView
         val pokeImage: ImageView
+        
 
         init {
             pokeName = view.findViewById(R.id.name)
@@ -56,12 +59,14 @@ class ListPokemonAdapter(private val pokeList: List<Results?>, private val conte
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        var item:Results = pokeList[position]!!
+        val item:Results = pokeList[position]!!
         holder.pokeName.text = item.name.toString()
         //holder.pokeURL.text = item.url.toString()
 
         // remove "https://pokeapi.co/api/v2/" from the full URL
         val tmpUrl = item.url.toString().replace("https://pokeapi.co/api/v2/", "")
+
+
 
         // Call retrofit to get image to show on the list view
         val api = RetrofitApiFactory().getPokemonApi()
@@ -83,7 +88,7 @@ class ListPokemonAdapter(private val pokeList: List<Results?>, private val conte
 
         // When any card is clicked
         holder.itemView.setOnClickListener{
-            val intent = Intent(context, DetailPokemon::class.java)
+            val intent = Intent(context, DetailPokemonActivity::class.java)
             intent.putExtra("tmpUrl", tmpUrl)
             context.startActivity(intent)
         }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,7 +14,7 @@ import com.example.pokedexapp.R
 import com.example.pokedexapp.dto.Results
 import com.google.android.material.snackbar.Snackbar
 
-class ListPokemon : AppCompatActivity(), ListsView {
+class ListPokemonActivity : AppCompatActivity(), ListsView {
     lateinit var presenter: ListsPresenter
 
     lateinit var container: View
@@ -76,7 +75,7 @@ class ListPokemon : AppCompatActivity(), ListsView {
 
         if (isPageIndex == null)
         {
-            Toast.makeText(this@ListPokemon, "Must be a digit", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ListPokemonActivity, "Must be a digit", Toast.LENGTH_SHORT).show()
             pageIndex.setText("1")
         }
         return pageIndex.text.toString().toInt()

@@ -1,17 +1,13 @@
 package com.example.pokedexapp.view
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.pokedexapp.R
-import com.example.pokedexapp.dto.Pokemon
 import com.example.pokedexapp.dto.Resource
-import com.example.pokedexapp.view.DetailView
-import com.example.pokedexapp.network.RetrofitApiFactory
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.RadarData
@@ -20,12 +16,9 @@ import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
-class DetailPokemon : AppCompatActivity(), DetailView{
+class DetailPokemonActivity : AppCompatActivity(), DetailView{
 
     lateinit var imageDefault: ImageView
     lateinit var imageShiny: ImageView
@@ -59,11 +52,11 @@ class DetailPokemon : AppCompatActivity(), DetailView{
     }
 
     override fun bindPokemonDetail(pokeResource:Resource){
-        Glide.with(this@DetailPokemon)
+        Glide.with(this@DetailPokemonActivity)
             .load(pokeResource.sprites?.front_default)
             .into(imageDefault)
 
-        Glide.with(this@DetailPokemon)
+        Glide.with(this@DetailPokemonActivity)
             .load(pokeResource.sprites?.front_shiny)
             .into(imageShiny)
 

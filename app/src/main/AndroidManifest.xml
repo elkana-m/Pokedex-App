@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokedexApp">
         <activity
-            android:name=".view.ListPokemon"
+            android:name=".view.ListPokemonActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.DetailPokemon"
+            android:name=".view.DetailPokemonActivity"
             android:exported="false"
-            android:parentActivityName=".view.ListPokemon">
+            android:parentActivityName=".view.ListPokemonActivity">
         </activity>
     </application>
 
